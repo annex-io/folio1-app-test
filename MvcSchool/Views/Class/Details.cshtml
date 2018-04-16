@@ -1,0 +1,50 @@
+﻿
+
+@model MvcSchool.Models.Class
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Enrollment", new { classId = Model.ID }, null)
+</p>
+
+<div>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>GPA</th>
+        </tr>
+
+        @foreach (var item in Model.Enrollments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.Surname)
+                    @(item.Student.IsHighGPA ? "⭐" : "")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.GPA)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Student", new { id = item.Student.ID }, null) |                    
+                    @Html.ActionLink("Delete", "Delete", "Enrollment", new { id = item.ID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
